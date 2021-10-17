@@ -120,10 +120,10 @@ router.put("/:id", function(req, res, next) {
 });
 
 //uploading img
-router.post("/upload", upload.single("productImage"), async(req, res) => {
-    console.log(req.file.path);
-    res.send({ imgUrl: req.file.path });
-});
+// router.post("/upload", upload.single("productImage"), async(req, res) => {
+//     console.log(req.file.path);
+//     res.send({ imgUrl: req.file.path });
+// });
 
 //saving book
 router.post("/sell", async(req, res) => {
