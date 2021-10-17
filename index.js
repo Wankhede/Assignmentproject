@@ -34,4 +34,4 @@ app.use("/api", route1);
 //app.use("/contactus", route2);
 
 //giving port no to app
-app.listen(8080, () => console.log("server up and running"));
+app.listen(port, () => console.log("server up and running"));
