@@ -3,21 +3,20 @@ const router = express.Router();
 const path = require("path");
 const Book = require("../model/bookModel");
 const mongoose = require("mongoose");
-const verify = require("../route/verifyToken");
 const Cart = require("../model/cartModel");
 
-const multer = require("multer");
+//const multer = require("multer");
 const { response } = require("express");
 //for taking multiport files
-const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, "./uploads/");
-    },
-    filename: function(req, file, cb) {
-        cb(null, path.join(Date.now() + file.originalname));
-    },
-});
-const upload = multer({ storage: storage });
+// const storage = multer.diskStorage({
+//     destination: function(req, file, cb) {
+//         cb(null, "./uploads/");
+//     },
+//     filename: function(req, file, cb) {
+//         cb(null, path.join(Date.now() + file.originalname));
+//     },
+// });
+//const upload = multer({ storage: storage });
 
 //getting book api/book
 router.get("/book", async(req, res) => {
@@ -209,6 +208,14 @@ router.delete("/cart", async(req, res) => {
     })
     res.json({ "message": "deleted" })
 })
+
+router.delete("/deleteId/book/:id", function(req, res, next) {
+    console.log(req.params.id)
+    Cart.findByIdAndRemove(req.params.id, function(err, post) {
+        if (err) return next(err);
+        res.json(post);
+    });
+});
 
 // router.get('/delete/:id', function(req, res) {
 //     var id = req.params.id;
